@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_SIZE 100
+
+int main()
+{
+    char str[MAX_SIZE];
+    int i, j, maxCount, charCount;
+    char maxChar;
+
+    printf("Enter a string: ");
+    fgets(str, MAX_SIZE, stdin);
+
+    maxCount = 0;
+
+    for(i = 0; i < strlen(str); i++)
+    {
+        charCount = 0;
+        
+        for(j = i+1; j < strlen(str); j++)
+        {
+            if(str[i] == str[j] && str[i] != ' ')
+            {
+                charCount++;
+            }
+        }
+
+        if(charCount > maxCount)
+        {
+            maxCount = charCount;
+            maxChar = str[i];
+        }
+    }
+
+    printf("Max repeated character in the string = %c\n", maxChar);
+    printf("It occurs %d times", maxCount+1);
+
+    return 0;
+}
