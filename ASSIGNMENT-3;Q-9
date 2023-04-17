@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main()
+{
+    int array1[10], array2[10];
+    int *p1 = array1, *p2 = array2;
+    int i;
+
+    printf("Input array1 elements: ");
+    for(i=0; i<10; i++)
+        scanf("%d", p1++);
+
+    p1 = array1;  //reset pointer to the start of array1
+    printf("Array1: ");
+    for(i=0; i<10; i++)
+        printf("%d ", *p1++);
+
+    p1 = array1;  //reset pointer to the start of array1
+    printf("\nCopying elements from array1 to array2...\n");
+
+    for(i=0; i<10; i++)
+        *(p2 + i) = *(p1 + i);
+
+    p2 = array2;  //reset pointer to the start of array2
+    printf("Array2: ");
+    for(i=0; i<10; i++)
+        printf("%d ", *p2++);
+
+    return 0;
+}
