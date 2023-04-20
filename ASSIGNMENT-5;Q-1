@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    // Open input file for reading
+    FILE* input_file = fopen("input.txt", "r");
+
+    // Open error log file for writing
+    FILE* error_log_file = fopen("error_log.txt", "w");
+
+    // Read input file line by line
+    char line[256];
+    while (fgets(line, sizeof(line), input_file)) {
+        // Check if line contains "error"
+        if (strstr(line, "error")) {
+            // If it does, write line to error log file
+            fputs(line, error_log_file);
+        }
+    }
+
+    // Close input and error log files
+    fclose(input_file);
+    fclose(error_log_file);
+
+    // Open error log file for reading
+    error_log_file = fopen("error_log.txt", "r");
+
+    // Read error log file line by line and print to console
+    while (fgets(line, sizeof(line), error_log_file)) {
+        printf("%s", line);
+    }
+
+    // Close error log file
+    fclose(error_log_file);
+
+    return 0;
+}
