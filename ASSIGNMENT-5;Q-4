@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    // Prompt user for file name and search string
+    char file_name[256];
+    char search_string[256];
+    printf("Enter file name: ");
+    scanf("%s", file_name);
+    printf("Enter search string: ");
+    scanf("%s", search_string);
+
+    // Open file for reading
+    FILE* file = fopen(file_name, "r");
+
+    // Check if file was opened successfully
+    if (!file) {
+        printf("Failed to open file\n");
+        return 1;
+    }
+
+    // Read file line by line
+    char line[256];
+    while (fgets(line, sizeof(line), file)) {
+        // Check if line contains search string
+        if (strstr(line, search_string)) {
+            printf("%s", line);
+        }
+    }
+
+    // Close file
+    fclose(file);
+
+    return 0;
+}
