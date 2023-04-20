@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+int main() {
+    // Open input file for reading
+    FILE* input_file = fopen("data.txt", "r");
+
+    // Check if file was opened successfully
+    if (!input_file) {
+        printf("Failed to open input file\n");
+        return 1;
+    }
+
+    // Initialize letter count array
+    int letter_counts[26] = {0};
+
+    // Read file character by character
+    int c;
+    while ((c = fgetc(input_file)) != EOF) {
+        // Convert character to uppercase
+        c = toupper(c);
+
+        // Check if character is a letter
+        if (isalpha(c)) {
+            // Increment letter count for corresponding array element
+            letter_counts[c - 'A']++;
+        }
+    }
+
+    // Close input file
+    fclose(input_file);
+
+    // Open output file for writing
+    FILE* output_file = fopen("statistics.txt", "w");
+
+    // Check if file was opened successfully
+    if (!output_file) {
+        printf("Failed to open output file\n");
+        return 1;
+    }
+
+    // Write letter counts to output file
+    for (int i = 0; i < 26; i++) {
+        fprintf(output_file, "%c: %d\n", 'A' + i, letter_counts[i]);
+    }
+
+    // Close output file
+    fclose(output_file);
+
+    return 0;
+    }
